@@ -1,0 +1,258 @@
+openapi: 3.0.0
+info:
+  title: Binar Bootcamp
+  version: 1.0.0
+servers:
+  - url: localhost://3000
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+paths:
+  /api/cars:
+    get:
+      tags:
+        - default
+      summary: Car - Get All Data
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - default
+      summary: Car - Create Data
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Lamborgini
+                price:
+                  type: integer
+                  example: '500000'
+                picture:
+                  type: string
+                  format: binary
+                start_rent:
+                  type: string
+                  example: '2024-05-30 12:14:00'
+                finish_rent:
+                  type: string
+                  example: '2024-05-30 12:14:00'
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDYtMDJUMDc6MTU6NDMuODMyWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDYtMDJUMDc6MTU6NDMuODMyWiIsImlhdCI6MTcxNzMzMzU1M30.RcDZY5abtBgi2_M9Ag2mtvOC1Y2F5jkUy2zJzkfHjb4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/cars/1:
+    get:
+      tags:
+        - default
+      summary: Car - Get by Id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - default
+      summary: Car - Update Data
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Mobil 12
+                price:
+                  type: integer
+                  example: '700000000'
+                picture:
+                  type: string
+                  format: binary
+                start_rent:
+                  type: string
+                  example: '2024-05-30 12:14:00'
+                finish_rent:
+                  type: string
+                  example: '2024-05-30 12:14:00'
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDYtMDJUMDc6MTU6NDMuODMyWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDYtMDJUMDc6MTU6NDMuODMyWiIsImlhdCI6MTcxNzMzMzU1M30.RcDZY5abtBgi2_M9Ag2mtvOC1Y2F5jkUy2zJzkfHjb4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/cars/11:
+    delete:
+      tags:
+        - default
+      summary: Car - Delete
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/logActivity:
+    get:
+      tags:
+        - default
+      summary: Car-LogActivity
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDYtMDJUMDc6MTU6NDMuODMyWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDYtMDJUMDc6MTU6NDMuODMyWiIsImlhdCI6MTcxNzMzMzU1M30.RcDZY5abtBgi2_M9Ag2mtvOC1Y2F5jkUy2zJzkfHjb4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/register:
+    post:
+      tags:
+        - default
+      summary: User - Register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: Budi
+                password: budi
+                email: budi@gmail.com
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/login:
+    post:
+      tags:
+        - default
+      summary: User/Admin/Superadmin - Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: superadmin@gmail.com
+                password: superadmin
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/whoami:
+    get:
+      tags:
+        - default
+      summary: User - Whoami
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDYtMDJUMDc6MTU6NDMuODMyWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDYtMDJUMDc6MTU6NDMuODMyWiIsImlhdCI6MTcxNzMzMzU1M30.RcDZY5abtBgi2_M9Ag2mtvOC1Y2F5jkUy2zJzkfHjb4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/users:
+    get:
+      tags:
+        - default
+      summary: User - Get All Data
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDYtMDFUMTY6MjE6MTcuNDkyWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDYtMDFUMTY6MjE6MTcuNDkyWiIsImlhdCI6MTcxNzI1OTM3MH0.BnXke2W0DpF4lvPWbKIoYx7H7TGUZIxpeTZcliryw7s
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/update/2:
+    put:
+      tags:
+        - default
+      summary: User - Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: Budi
+                email: budi@gmail.com
+                role: admin
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDYtMDFUMTY6MjE6MTcuNDkyWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDYtMDFUMTY6MjE6MTcuNDkyWiIsImlhdCI6MTcxNzI1OTM3MH0.BnXke2W0DpF4lvPWbKIoYx7H7TGUZIxpeTZcliryw7s
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/delete/2:
+    delete:
+      tags:
+        - default
+      summary: User - Delete
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDYtMDFUMTY6MjE6MTcuNDkyWiIsInVwZGF0ZWRBdCI6IjIwMjQtMDYtMDFUMTY6MjE6MTcuNDkyWiIsImlhdCI6MTcxNzI1OTM3MH0.BnXke2W0DpF4lvPWbKIoYx7H7TGUZIxpeTZcliryw7s
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
