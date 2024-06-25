@@ -6,7 +6,7 @@ import CarLogService from "../services/carLogsService";
 import Users from "../models/Users";
 
 interface CustomRequest extends Request {
-  user?: Users; 
+  user?: Users;
 }
 
 export const getAllCars = async (
@@ -52,9 +52,15 @@ export const deleteCar = async (
   try {
     const { id } = req.params;
     const carId = parseInt(id, 10);
-    console.log(carId);
-    
+
     await CarService.deleteCarById(carId);
+    const userId = req.user?.id;
+    await CarLogService.createLog({
+      activity_type: "delete",
+      user_id: userId,
+      car_id: carId,
+    });
+
     res.json({ message: "Car deleted successfully" });
   } catch (error) {
     console.error("Error deleting car:", error);
@@ -65,7 +71,7 @@ export const deleteCar = async (
 //Create Data Car
 export const createCar = async (req: CustomRequest, res: Response) => {
   try {
-    mUpload.single("picture")(req, res, async (err: any) => {
+    mUpload.single("picture")(req, res, async (err: unknown) => {
       if (err) {
         console.error("Error uploading picture:", err);
         return res
@@ -123,7 +129,7 @@ export const createCar = async (req: CustomRequest, res: Response) => {
 //Update Data Car
 export const updateCar = async (req: CustomRequest, res: Response) => {
   try {
-    mUpload.single("picture")(req, res, async (err: any) => {
+    mUpload.single("picture")(req, res, async (err: unknown) => {
       if (err) {
         console.error("Error uploading picture:", err);
         return res

@@ -10,8 +10,6 @@ class CarLogRepository {
   static async getAll(): Promise<CarLog[]> {
     return CarLog.query();
   }
-
-  // Tambahan fungsi lainnya seperti getById, update, delete, dll. sesuai kebutuhan
 }
 
 export default CarLogRepository;
