@@ -53,7 +53,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         const isPasswordCorrect = await checkPassword(user.password, passwordBody);
 
         if (!isPasswordCorrect) {
-            res.status(404).json({ message: "Password salah." });
+            res.status(401).json({ message: "Password salah." });
             return;
         }
 
