@@ -22,10 +22,10 @@ const knexConfig: { [key: string]: Knex.Config } = {
   test: {
     client: 'pg',
     connection: {
-      host: process.env.DB_TEST_HOST || process.env.DB_HOST,
-      user: process.env.DB_TEST_USER || process.env.DB_USER,
-      password: process.env.DB_TEST_PASSWORD || process.env.DB_PASSWORD,
-      database: process.env.DB_TEST_DATABASE || process.env.DB_DATABASE,
+      host: process.env.DB_TEST_HOST || process.env.PGHOST,
+      user: process.env.DB_TEST_USER || process.env.PGUSER,
+      password: process.env.DB_TEST_PASSWORD || process.env.PGPASSWORD,
+      database: process.env.DB_TEST_DATABASE || process.env.PGDATABASE,
     },
     migrations: {
       directory: './db/migrations',
@@ -34,7 +34,21 @@ const knexConfig: { [key: string]: Knex.Config } = {
       directory: './db/seeds',
     },
   },
-  // Tambahkan konfigurasi untuk environment lain seperti 'production', 'staging', dll.
+  production: {
+    client: 'pg',
+    connection: {
+      host: process.env.PGHOST,
+      user: process.env.PGUSER,
+      password: process.env.PGPASSWORD,
+      database: process.env.PGDATABASE,
+    },
+    migrations: {
+      directory: './db/migrations',
+    },
+    seeds: {
+      directory: './db/seeds',
+    },
+  },
 };
 
 export default knexConfig;
