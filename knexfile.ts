@@ -12,6 +12,10 @@ const knexConfig: { [key: string]: Knex.Config } = {
       password: process.env.PGPASSWORD,
       database: process.env.PGDATABASE,
     },
+    pool: {
+      min: 2,  // Minimal jumlah koneksi dalam pool
+      max: 10, // Maksimal jumlah koneksi dalam pool
+    },
     migrations: {
       directory: './db/migrations',
     },
@@ -27,6 +31,10 @@ const knexConfig: { [key: string]: Knex.Config } = {
       password: process.env.DB_TEST_PASSWORD || process.env.PGPASSWORD,
       database: process.env.DB_TEST_DATABASE || process.env.PGDATABASE,
     },
+    pool: {
+      min: 2,
+      max: 10,
+    },
     migrations: {
       directory: './db/migrations',
     },
@@ -41,6 +49,10 @@ const knexConfig: { [key: string]: Knex.Config } = {
       user: process.env.PGUSER,
       password: process.env.PGPASSWORD,
       database: process.env.PGDATABASE,
+    },
+    pool: {
+      min: 2,
+      max: 10,
     },
     migrations: {
       directory: './db/migrations',
