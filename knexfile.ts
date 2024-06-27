@@ -13,9 +13,10 @@ const knexConfig: { [key: string]: Knex.Config } = {
       database: process.env.PGDATABASE,
     },
     pool: {
-      min: 2,  // Minimal jumlah koneksi dalam pool
-      max: 10, // Maksimal jumlah koneksi dalam pool
-      idleTimeoutMillis: 30000,
+      min: 2,
+      max: 10,
+      idleTimeoutMillis: 600000, 
+      propagateCreateError: false, 
     },
     migrations: {
       directory: './db/migrations',
@@ -35,7 +36,8 @@ const knexConfig: { [key: string]: Knex.Config } = {
     pool: {
       min: 2,
       max: 10,
-      idleTimeoutMillis: 30000,
+      idleTimeoutMillis: 600000, 
+      propagateCreateError: false, 
     },
     migrations: {
       directory: './db/migrations',
@@ -55,7 +57,8 @@ const knexConfig: { [key: string]: Knex.Config } = {
     pool: {
       min: 2,
       max: 10,
-      idleTimeoutMillis: 30000,
+      idleTimeoutMillis: 600000, 
+      propagateCreateError: false, 
     },
     migrations: {
       directory: './db/migrations',
