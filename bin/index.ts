@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Express, Request, Response } from "express";
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 import bodyParser from 'body-parser';
@@ -13,6 +13,12 @@ const swaggerDocument = YAML.load('openapi-BCR.yaml');
 const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 3000;
+
+app.get("/", (req: Request, res: Response): void => {
+  res.status(200).json({
+    "message": "Restful API BCR SUCCESSFUL"
+  })
+});
 
 app.use(bodyParser.json());
 app.use('/api', carRoutes);
