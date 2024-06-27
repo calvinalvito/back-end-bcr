@@ -3,26 +3,26 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   test:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2 
-    - name: Set up Node.js 
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20' 
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20"
 
-    - name: Install dependencies 
-      run: npm install 
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run tests 
-      run: npm run test 
-      env:
-      PGHOST: ${{secret.PGHOST}}
-      PGPORT: ${{secret.PGPORT}}
-      PGDATABASE: ${{secret.PGDATABASE}}
-      PGUSER: ${{secret.PGUSER}}
-      PGPASSWORD: ${{secret.PGPASSWORD}}
+      - name: Run tests
+        run: npm run test
+        env:
+        PGHOST: ${{secrets.PGHOST}}
+        PGPORT: ${{secrets.PGPORT}}
+        PGDATABASE: ${{secrets.PGDATABASE}}
+        PGUSER: ${{secrets.PGUSER}}
+        PGPASSWORD: ${{secrets.PGPASSWORD}}
