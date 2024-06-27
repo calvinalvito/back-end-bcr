@@ -2,7 +2,7 @@ import request from 'supertest';
 import app from './index';
 
 describe('User Login', () => {
-  it('should login with valid credentials', (done) => {
+  it('should login with valid credentials', async () => {
     const loginData = {
       email: 'superadmin@gmail.com',
       password: 'superadmin'
@@ -10,28 +10,24 @@ describe('User Login', () => {
 
     console.log('Starting login test with data:', loginData);
 
-    request(app)
+    const response = await request(app)
       .post('/api/v1/login')
       .send(loginData)
-      .set('Accept', 'application/json')
-      .then(response => {
-        console.log('Response status:', response.status);
-        console.log('Response headers:', response.headers);
-        console.log('Response body:', response.body);
+      .set('Accept', 'application/json');
 
-        expect(response.status).toBe(200);
-        expect(response.body).toHaveProperty('id');
-        expect(response.body).toHaveProperty('email');
-        expect(response.body).toHaveProperty('token');
-        expect(response.body).toHaveProperty('createdAt');
-        expect(response.body).toHaveProperty('updatedAt');
+    console.log('Response status:', response.status);
+    console.log('Response headers:', response.headers);
+    console.log('Response body:', response.body);
 
-        done(); 
-      })
-      .catch(err => done(err)); 
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('id');
+    expect(response.body).toHaveProperty('email');
+    expect(response.body).toHaveProperty('token');
+    expect(response.body).toHaveProperty('createdAt');
+    expect(response.body).toHaveProperty('updatedAt');
   });
 
-  it('should fail with invalid credentials', (done) => {
+  it('should fail with invalid credentials', async () => {
     const loginData = {
       email: 'wrongemail@gmail.com',
       password: 'wrongpassword'
@@ -39,20 +35,16 @@ describe('User Login', () => {
 
     console.log('Starting login test with invalid data:', loginData);
 
-    request(app)
+    const response = await request(app)
       .post('/api/v1/login')
       .send(loginData)
-      .set('Accept', 'application/json')
-      .then(response => {
-        console.log('Response status:', response.status);
-        console.log('Response headers:', response.headers);
-        console.log('Response body:', response.body);
+      .set('Accept', 'application/json');
 
-        expect(response.status).toBe(404);
-        expect(response.body).toHaveProperty('message', 'Email tidak ditemukan.');
+    console.log('Response status:', response.status);
+    console.log('Response headers:', response.headers);
+    console.log('Response body:', response.body);
 
-        done(); 
-      })
-      .catch(err => done(err)); 
+    expect(response.status).toBe(404);
+    expect(response.body).toHaveProperty('message', 'Email tidak ditemukan.');
   });
 });
